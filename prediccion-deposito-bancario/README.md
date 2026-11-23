@@ -1,4 +1,4 @@
-# PG1: predicción de contratación de depósitos a plazo
+# Predicción de contratación de depósitos a plazo
 
 Práctica grupal de aprendizaje automático. Es un problema de clasificación binaria muy desbalanceado (11,23 % de positivos) sobre datos de marketing bancario. La métrica es Macro F1 y no se usa la variable `duration`, por fuga de información.
 
