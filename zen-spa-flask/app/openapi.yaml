@@ -1,0 +1,113 @@
+swagger: "2.0"
+
+info:
+  title: Zen SPA API
+  version: "1.0"
+
+basePath: /
+
+paths:
+  /api/v1/masajes:
+    get:
+      summary: Obtener todos los masajes
+      responses:
+        200:
+          description: Lista de masajes
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Masaje'
+
+    post:
+      summary: Crear un masaje
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/MasajeInput'
+      responses:
+        201:
+          description: Masaje creado
+
+  /api/v1/masajes/{id}:
+    get:
+      summary: Obtener masaje por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Masaje encontrado
+          schema:
+            $ref: '#/definitions/Masaje'
+
+    put:
+      summary: Actualizar masaje
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/MasajeInput'
+      responses:
+        200:
+          description: Masaje actualizado
+
+    delete:
+      summary: Eliminar masaje
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Eliminado
+
+definitions:
+  Masaje:
+    type: object
+    properties:
+      id:
+        type: integer
+      nombre:
+        type: string
+      duracion:
+        type: integer
+      precio:
+        type: number
+      individual:
+        type: boolean
+      user_id:
+        type: string
+      filename:
+        type: string
+
+  MasajeInput:
+    type: object
+    required:
+      - nombre
+      - duracion
+      - precio
+      - individual
+      - user_id
+    properties:
+      nombre:
+        type: string
+      duracion:
+        type: integer
+      precio:
+        type: number
+      individual:
+        type: boolean
+      user_id:
+        type: string
+      filename:
+        type: string

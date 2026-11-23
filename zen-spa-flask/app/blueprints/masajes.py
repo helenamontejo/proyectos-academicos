@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, g, flash, session, abort
 from ..handle_files import save_file, delete_file
 from ..models.masaje import Masaje
-from ..database import db
+from .. import db
 
 masajes_bp = Blueprint("masajes", __name__, url_prefix="/masajes")
 
