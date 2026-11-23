@@ -3,7 +3,7 @@
 Práctica grupal de aprendizaje automático. Es un problema de clasificación binaria muy desbalanceado (11,23 % de positivos) sobre datos de marketing bancario. La métrica es Macro F1 y no se usa la variable `duration`, por fuga de información.
 
 ## Contenido
-- `PG1_codigo.ipynb`: análisis exploratorio, preprocesamiento con `Pipeline`, validación (hold-out y CV estratificada), comparativa de KNN, árbol de decisión, bagging, Random Forest, Extra Trees y AdaBoost, y resultados en Kaggle.
+- `codigo.ipynb`: análisis exploratorio, preprocesamiento con `Pipeline`, validación (hold-out y CV estratificada), comparativa de KNN, árbol de decisión, bagging, Random Forest, Extra Trees y AdaBoost, y resultados en Kaggle.
 
 ## Resultados
 Mejor puntuación privada en Kaggle: 0,6870 (árbol de decisión optimizado con umbral 0,73).
