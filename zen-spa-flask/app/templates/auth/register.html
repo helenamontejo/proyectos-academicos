@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}Zen Spa - Registro{% endblock %}
+
+{% block content %}
+<section class="contenido">
+  <h2>Registro de usuario</h2>
+
+  <form method="post" action="/auth/register" class="form-login">
+    <label>Nombre de usuario</label>
+    <input type="text" name="username" placeholder="Tu nombre" required>
+
+    <label>Email</label>
+    <input type="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+
+    <label>Contraseña</label>
+    <input type="password" name="password" placeholder="Contraseña" required>
+
+    <label>Repetir contraseña</label>
+    <input type="password" name="password2" placeholder="Repite la contraseña" required>
+
+    <button type="submit">Registrarse</button>
+  </form>
+
+  <p class="centrado">¿Ya tienes cuenta? <a href="/auth/login">Inicia sesión aquí</a></p>
+</section>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}Zen Spa - Nuevo usuario{% endblock %}
+
+{% block content %}
+<section class="contenido">
+  <h2>Crear usuario</h2>
+
+  <form method="post" action="/usuarios/">
+    <label>Nombre</label>
+    <input type="text" name="username" required>
+
+    <label>Email</label>
+    <input type="email" name="email" required>
+
+    <label>Contraseña</label>
+    <input type="text" name="password" required>
+
+    <label>Rol</label>
+    <select name="role">
+      <option value="user" selected>User</option>
+      <option value="admin">Admin</option>
+    </select>
+
+    <button type="submit">Crear</button>
+  </form>
+</section>
+{% endblock %}

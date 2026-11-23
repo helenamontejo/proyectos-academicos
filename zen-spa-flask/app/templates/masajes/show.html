@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}Zen Spa - Detalle del Masaje{% endblock %}
+
+{% block content %}
+<section class="contenido">
+  <h2>Detalle del Masaje</h2>
+
+  <div class="detalle-masaje-centrado">
+
+    {% if masaje.filename %}
+      <div class="detalle-con-imagen">
+        <div class="detalle-imagen">
+          <img src="{{ url_for('assets', filename='images/' + masaje.filename) }}" 
+               alt="Imagen del masaje">
+        </div>
+        <div class="detalle-info">
+          <ul>
+            <li><strong>Nombre:</strong> {{ masaje.nombre }}</li>
+            <li><strong>Duración:</strong> {{ masaje.duracion }} minutos</li>
+            <li><strong>Precio:</strong> {{ masaje.precio }}€</li>
+            <li><strong>Individual:</strong> {{ "Sí" if masaje.individual else "No" }}</li>
+            <li><strong>Usuario:</strong> {{ masaje.user.username }}</li>
+          </ul>
+        </div>
+      </div>
+    {% else %}
+      <div class="detalle-info-solo">
+        <ul>
+          <li><strong>Nombre:</strong> {{ masaje.nombre }}</li>
+          <li><strong>Duración:</strong> {{ masaje.duracion }} minutos</li>
+          <li><strong>Precio:</strong> {{ masaje.precio }}€</li>
+          <li><strong>Individual:</strong> {{ "Sí" if masaje.individual else "No" }}</li>
+          <li><strong>Usuario:</strong> {{ masaje.user.username }}</li>
+        </ul>
+      </div>
+    {% endif %}
+
+    <div class="botones-detalle centrado">
+      {% if session.get("user_id") and (session.get("role") == "admin" or masaje.user_id == session.get("user_id")) %}
+        <a href="/masajes/{{ masaje.id }}/edit" class="button">Editar Masaje</a>
+
+        <form action="/masajes/{{ masaje.id }}/delete" method="post" style="display:inline;">
+          <button type="submit">Eliminar Masaje</button>
+        </form>
+      {% endif %}
+
+      <a href="/masajes" class="button">Volver a la lista</a>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

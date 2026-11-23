@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}Zen Spa - Detalle del Usuario{% endblock %}
+
+{% block content %}
+<section class="contenido">
+  <h2>Detalle del Usuario</h2>
+
+  <div class="detalle-masaje-centrado">
+    <div class="detalle-info-solo">
+      <ul>
+        <li><strong>Nombre:</strong> {{ usuario.username }}</li>
+        <li><strong>Email:</strong> {{ usuario.email }}</li>
+        <li><strong>Rol:</strong> {{ usuario.role }}</li>
+        <li><strong>Contraseña:</strong> ****</li>
+      </ul>
+    </div>
+
+    <div class="botones-detalle">
+      <a href="/usuarios/{{ usuario.id }}/edit" class="button">Editar Usuario</a>
+
+      <form action="/usuarios/{{ usuario.id }}/delete" method="post" style="display:inline;">
+        <button type="submit">Eliminar Usuario</button>
+      </form>
+
+      <a href="/usuarios" class="button">Volver a la lista</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

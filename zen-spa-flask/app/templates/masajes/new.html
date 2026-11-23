@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}Zen Spa - Nuevo masaje{% endblock %}
+
+{% block content %}
+<section class="contenido">
+  <h2>Crear masaje</h2>
+
+  <form method="post" action="/masajes/" enctype="multipart/form-data">
+    <label>Nombre</label>
+    <input type="text" name="nombre" required>
+
+    <label>Duración (minutos)</label>
+    <input type="number" name="duracion" required min="1">
+
+    <label>Precio (€)</label>
+    <input type="number" name="precio" required min="0">
+
+    <label>Individual</label>
+    <input type="checkbox" name="individual">
+
+    <label>Imagen</label>
+    <input type="file" name="image">
+
+    <button type="submit">Crear</button>
+  </form>
+</section>
+{% endblock %}

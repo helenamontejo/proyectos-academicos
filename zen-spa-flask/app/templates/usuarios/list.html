@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}Zen Spa - Lista de usuarios{% endblock %}
+
+{% block content %}
+<section class="contenido">
+  <h2>Lista de usuarios</h2>
+
+  <table>
+    <tr>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>Rol</th>
+      <th>Acciones</th>
+    </tr>
+
+    {% for usuario in usuarios %}
+    <tr>
+      <td>
+        <a href="/usuarios/{{ usuario.id }}" class="nombre-usuario">
+          {{ usuario.username }}
+        </a>
+      </td>
+      <td>{{ usuario.email }}</td>
+      <td>{{ usuario.role }}</td>
+      <td>
+        <a href="/usuarios/{{ usuario.id }}/edit" class="button">Editar</a>
+
+        <form action="/usuarios/{{ usuario.id }}/delete" method="post" style="display:inline;">
+          <button type="submit">Eliminar</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <div class="centrado">
+    <a href="/usuarios/new" class="button">Nuevo usuario</a>
+  </div>
+</section>
+{% endblock %}

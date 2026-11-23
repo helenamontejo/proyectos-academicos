@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block title %}Zen Spa - Lista de masajes{% endblock %}
+
+{% block content %}
+<section class="contenido">
+  <h2>Lista de masajes</h2>
+
+  <!-- FORMULARIO DE FILTRO -->
+  <form method="get" action="/masajes" class="filtros">
+    <input 
+      type="text"
+      name="nombre"
+      placeholder="Buscar nombre"
+      value="{{ request.args.get('nombre','') }}"
+    >
+
+    <select name="precio">
+      <option value="">Todos los precios</option>
+      <option value="menor100" {% if request.args.get('precio')=="menor100" %}selected{% endif %}>Menor de 100€</option>
+      <option value="entre100y120" {% if request.args.get('precio')=="entre100y120" %}selected{% endif %}>Entre 100€ y 120€</option>
+      <option value="mayor120" {% if request.args.get('precio')=="mayor120" %}selected{% endif %}>Mayor de 120€</option>
+    </select>
+
+    <button type="submit">Filtrar</button>
+  </form>
+
+  {% if masajes|length == 0 %}
+    <p>No se encontraron masajes con esos filtros.</p>
+  {% endif %}
+
+  <table>
+    <tr>
+      <th>Imagen</th>
+      <th>Nombre</th>
+      <th>Duración</th>
+      <th>Precio</th>
+      <th>Individual</th>
+      <th>Usuario</th>
+      <th>Acciones</th>
+    </tr>
+
+    {% for masaje in masajes %}
+    <tr>
+      <td>
+        {% if masaje.filename %}
+          <img src="{{ url_for('assets', filename='thumbnails/' + masaje.filename) }}"
+               alt="Foto"
+               width="80"
+               style="border-radius:10px;">
+        {% endif %}
+      </td>
+
+      <td>
+        <a href="/masajes/{{ masaje.id }}" class="nombre-masaje">
+          {{ masaje.nombre }}
+        </a>
+      </td>
+      <td>{{ masaje.duracion }}</td>
+      <td>{{ masaje.precio }}€</td>
+      <td>{{ "Sí" if masaje.individual else "No" }}</td>
+      <td>{{ masaje.user.username }}</td>
+
+      <td>
+        {% if session.get("user_id") and (session.get("role") == "admin" or masaje.user_id == session.get("user_id")) %}
+          <a href="/masajes/{{ masaje.id }}/edit" class="button">Editar</a>
+
+          <form action="/masajes/{{ masaje.id }}/delete" method="post" style="display:inline;">
+            <button type="submit">Eliminar</button>
+          </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <div class="centrado">
+    {% if session.get("user_id") %}
+      <a href="/masajes/new" class="button">Nuevo masaje</a>
+    {% endif %}
+  </div>
+
+</section>
+{% endblock %}

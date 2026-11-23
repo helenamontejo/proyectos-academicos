@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}Zen Spa - Editar masaje{% endblock %}
+
+{% block content %}
+<section class="contenido">
+  <h2>Editar masaje</h2>
+
+  <form method="post" action="/masajes/{{ masaje.id }}/edit" enctype="multipart/form-data">
+    <label>Nombre</label>
+    <input type="text" name="nombre" value="{{ masaje.nombre }}" required>
+
+    <label>Duración (minutos)</label>
+    <input type="number" name="duracion" value="{{ masaje.duracion }}" required min="1">
+
+    <label>Precio (€)</label>
+    <input type="number" name="precio" value="{{ masaje.precio }}" required min="0">
+
+    <label>Individual</label>
+    <input type="checkbox" name="individual" {% if masaje.individual %}checked{% endif %}>
+
+    <label>Imagen (dejar en blanco para no cambiar)</label>
+    <input type="file" name="image">
+
+    <button type="submit">Actualizar</button>
+  </form>
+</section>
+{% endblock %}

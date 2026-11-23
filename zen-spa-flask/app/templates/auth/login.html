@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}Zen Spa - Login{% endblock %}
+
+{% block content %}
+<section class="contenido">
+  <h2>Iniciar sesión</h2>
+
+  <form method="post" action="/auth/login" class="form-login">
+    <label>Email</label>
+    <input type="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+
+    <label>Contraseña</label>
+    <input type="password" name="password" placeholder="Contraseña" required>
+
+    <button type="submit">Iniciar sesión</button>
+  </form>
+
+  <p class="centrado">¿No tienes cuenta? <a href="/auth/register">Regístrate aquí</a></p>
+</section>
+{% endblock %}

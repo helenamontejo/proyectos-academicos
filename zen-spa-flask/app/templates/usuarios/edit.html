@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}Zen Spa - Editar usuario{% endblock %}
+
+{% block content %}
+<section class="contenido">
+  <h2>Editar usuario</h2>
+
+  <form method="post" action="/usuarios/{{ usuario.id }}/edit">
+    <label>Nombre</label>
+    <input type="text" name="username" value="{{ usuario.username }}" required>
+
+    <label>Email</label>
+    <input type="email" name="email" value="{{ usuario.email }}" required>
+
+    <label>Contraseña (dejar en blanco para no cambiar)</label>
+    <input type="text" name="password" placeholder="****">
+
+    <label>Rol</label>
+    <select name="role">
+      <option value="user" {% if usuario.role == 'user' %}selected{% endif %}>User</option>
+      <option value="admin" {% if usuario.role == 'admin' %}selected{% endif %}>Admin</option>
+    </select>
+
+    <button type="submit">Actualizar</button>
+  </form>
+</section>
+{% endblock %}
