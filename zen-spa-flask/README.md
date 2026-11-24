@@ -35,6 +35,8 @@ Flask, Jinja2, SQLAlchemy y Flask-Migrate (Alembic) con MySQL 8.0, Pydantic, Fla
 
    También se puede arrancar con `python -m app.app`. La web está en http://127.0.0.1:5000 y la documentación de la API en http://127.0.0.1:5000/apidocs/.
 
+La migración de Alembic que crea las tablas está en `app/migrations/`. Como alternativa a `python -m app.seed`, se puede aplicar con `flask --app app db upgrade -d app/migrations`.
+
 Los usuarios de ejemplo son solo para desarrollo: `admin` / `admin123`, `marta` / `marta123` y `pablo` / `pablo123`.
 
 ## Evolución del proyecto

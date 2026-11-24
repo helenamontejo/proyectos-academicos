@@ -59,6 +59,8 @@ def crear():
     user_id = session.get("user_id")
 
     filename = save_file()
+    if filename is None and request.files.get("image") and request.files["image"].filename:
+        return redirect("/masajes/new")  # imagen rechazada: save_file ya avisó
 
     nuevo = Masaje(
         nombre=nombre,
@@ -110,12 +112,15 @@ def actualizar(id):
     if session.get("role") != "admin" and g.masaje.user_id != session.get("user_id"):
         abort(403)
 
+    filename = save_file()
+    if filename is None and request.files.get("image") and request.files["image"].filename:
+        return redirect(f"/masajes/{id}/edit")  # imagen rechazada: save_file ya avisó
+
     g.masaje.nombre = request.form.get("nombre").strip()
     g.masaje.duracion = int(request.form.get("duracion"))
     g.masaje.precio = int(request.form.get("precio"))
     g.masaje.individual = "individual" in request.form
 
-    filename = save_file()
     if filename:
         delete_file(g.masaje.filename)
         g.masaje.filename = filename

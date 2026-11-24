@@ -48,6 +48,10 @@ def register():
     email = request.form.get("email")
     password = request.form.get("password")
 
+    if User.query.filter_by(email=email).first():
+        flash("Ya existe un usuario con ese email", "error")
+        return redirect("/auth/register")
+
     user = User(username=username, email=email)
     user.set_password(password)
 

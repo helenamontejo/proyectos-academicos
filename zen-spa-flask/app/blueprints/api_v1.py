@@ -51,7 +51,9 @@ def get_masaje(id):
     logger.info(f"GET /masajes/{id}")
 
     try:
-        masaje = Masaje.query.get_or_404(id)
+        masaje = db.session.get(Masaje, id)
+        if not masaje:
+            return jsonify({"error": "Masaje no encontrado"}), 404
 
         external_data = asyncio.run(get_external_info(id))
 
@@ -118,7 +120,9 @@ def create_masaje():
 def update_masaje(id):
     logger.info(f"PUT /masajes/{id}")
 
-    masaje = Masaje.query.get_or_404(id)
+    masaje = db.session.get(Masaje, id)
+    if not masaje:
+        return jsonify({"error": "Masaje no encontrado"}), 404
 
     try:
         data = MasajeCreateDTO(**request.json)
@@ -165,7 +169,10 @@ def delete_masaje(id):
     logger.info(f"DELETE /masajes/{id}")
 
     try:
-        masaje = Masaje.query.get_or_404(id)
+        masaje = db.session.get(Masaje, id)
+        if not masaje:
+            return jsonify({"error": "Masaje no encontrado"}), 404
+
         db.session.delete(masaje)
         db.session.commit()
 
@@ -175,4 +182,4 @@ def delete_masaje(id):
 
     except Exception as e:
         logger.error(f"Error en DELETE /masajes/{id}: {str(e)}")
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": str(e)}), 500

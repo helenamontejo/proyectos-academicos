@@ -35,6 +35,10 @@ def crear():
         flash("Debe completar todos los campos obligatorios.", "error")
         return redirect("/usuarios/new")
 
+    if User.query.filter_by(email=email).first():
+        flash("Ya existe un usuario con ese email.", "error")
+        return redirect("/usuarios/new")
+
     # Crear usuario y asignar hash de contraseña
     usuario = User(username=username, email=email, role=role)
     usuario.set_password(password)
@@ -74,6 +78,11 @@ def actualizar(id):
         flash("Username y email son obligatorios.", "error")
         return redirect(f"/usuarios/{id}/edit")
 
+    otro = User.query.filter_by(email=email).first()
+    if otro and otro.id != g.usuario.id:
+        flash("Ya existe un usuario con ese email.", "error")
+        return redirect(f"/usuarios/{id}/edit")
+
     g.usuario.username = username
     g.usuario.email = email
     g.usuario.role = role
@@ -92,4 +101,4 @@ def eliminar(id):
         db.session.delete(g.usuario)
         db.session.commit()
         flash("Usuario eliminado correctamente", "success")
-    return redirect("/usuarios/")
+    return redirect("/usuarios/")
